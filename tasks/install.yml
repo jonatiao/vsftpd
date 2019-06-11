@@ -1,0 +1,19 @@
+---
+- name: Instala servidor vsftpd e lftp usando var item
+  when: ansible_os_family == "Debian"
+  apt:
+    name: "{{item}}"
+    state: present
+    update_cache: true
+  with_items:
+    - vsftpd
+    - lftp
+  register: vsftpd_present
+  notify:
+    - Start Vsftpd
+  tags: vsftpd
+
+- name: Start Vsftpd
+  when: ansible_os_family == "Debian"
+  service: name=vsftpd state=started
+  tags: vsftpd

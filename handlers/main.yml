@@ -1,0 +1,5 @@
+---
+# handlers file for vsftpd
+- name: Start Vsftpd
+#  when: vsftpd_present|success
+  service: name=vsftpd state=restarted

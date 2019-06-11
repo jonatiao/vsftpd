@@ -1,0 +1,24 @@
+---
+- name: Instala servidor vsftpd e lftp usando var item deb
+  when: ansible_os_family == "Debian"
+  template:
+    src: vsftpd-debian.conf.j2
+    dest: /etc/vsftpd.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Start Vsftpd
+  tags: vsftpd
+
+- name: Instala servidor vsftpd e lftp usando var item redh
+  when: ansible_os_family == "RedHat"
+  template:
+    src: vsftpd-redhat.conf.j2
+    dest: /etc/vsftpd.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Start Vsftpd
+  tags: vsftpd
